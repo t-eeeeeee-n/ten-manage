@@ -1,9 +1,14 @@
 "use client";
 
-import {FaHome} from "react-icons/fa";
-import {ReactElement, ReactNode, useState} from "react";
+import {FaBrain, FaHome, FaLaptopCode, FaPenNib} from "react-icons/fa";
+import {ReactElement, useState} from "react";
 import {IoMenu, IoSearchSharp} from "react-icons/io5";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import {SiTestinglibrary} from "react-icons/si";
+import {IoMdSettings} from "react-icons/io";
+import { MdFavorite } from "react-icons/md";
+import {TbUserQuestion} from "react-icons/tb";
 
 type Navigation = {
     page: string;
@@ -18,9 +23,34 @@ const Navigations: Navigation[] = [
         icon: <FaHome className={"size-6"} />
     },
     {
+        page: "Liked",
+        path: "/liked",
+        icon: <MdFavorite className={"size-6"} />
+    },
+    {
+        page: "Diary",
+        path: "/diary",
+        icon: <FaPenNib className={"size-6"} />
+    },
+    {
+        page: "Idea",
+        path: "/idea",
+        icon: <TbUserQuestion className={"size-6"} />
+    },
+    {
+        page: "Code",
+        path: "/code",
+        icon: <FaLaptopCode className={"size-6"} />
+    },
+    {
+        page: "Setting",
+        path: "/setting",
+        icon: <IoMdSettings className={"size-6"} />
+    },
+    {
         page: "Test",
         path: "/test",
-        icon: <FaHome className={"size-6"} />
+        icon: <SiTestinglibrary className={"size-6"} />
     }
 ]
 
@@ -28,8 +58,14 @@ const SideBar = () => {
 
     const [ menuOpen, setMenuOpen ] = useState(true);
 
+    const pathname = usePathname();
+
+    const isPageActive = (pagePath: string): boolean => {
+        return pagePath === pathname
+    }
+
     return(
-        <aside className={`fixed min-h-screen duration-300 bg-slate-950 ${menuOpen ? "w-[250px]" : "w-[60px]"}`}>
+        <aside className={`duration-300 bg-slate-950 overflow-y-auto h-full min-h-screen ${menuOpen ? "w-[250px]" : "w-[60px]"}`}>
             <div className={"p-2"}>
                 <div className={`flex mb-6 ${menuOpen ? "justify-end" : "justify-center"}`}>
                     <button onClick={() => setMenuOpen(!menuOpen)}>
@@ -39,18 +75,20 @@ const SideBar = () => {
                 <div className={"mb-6 bg-gray-200 rounded"}>
                     <div className={`flex items-center p-2 ${menuOpen ? "" : "justify-center"}`}>
                         <span className={"flex justify-center"}>
-                            <IoSearchSharp className={`${menuOpen ? "mr-4" : "m-0"}`} />
+                            <IoSearchSharp className={`${menuOpen ? "mr-4" : "m-0"}`}/>
                         </span>
-                        <input placeholder="Search..." className={`bg-gray-200 border-none focus:outline-none ${menuOpen ? "visible w-full" : "invisible w-0"}`}/>
+                        <input placeholder="Search..."
+                               className={`bg-gray-200 border-none focus:outline-none ${menuOpen ? "visible w-full" : "invisible w-0"}`}/>
                     </div>
                 </div>
                 <span className={"block h-1 mb-6 bg-gray-200 w-full"}></span>
                 {Navigations.map((navigation) => (
-                    <Link href={navigation.path} key={navigation.page} className={`flex items-center h-10`}>
+                    <Link href={navigation.path} key={navigation.page}
+                          className={`flex items-center h-10 ${isPageActive(navigation.path) ? "bg-blue-700" : "hover:bg-blue-900"}`}>
                         <span className={`text-white ml-3 mr-2`}>
-                            { navigation.icon }
+                            {navigation.icon}
                         </span>
-                        <p className={`leading-3 text-xs text-white duration-100 ${menuOpen ? "visible w-auto" : "invisible w-0"}`}>{ navigation.page }</p>
+                        <p className={`leading-3 text-xs text-white duration-100 ${menuOpen ? "visible w-auto" : "invisible w-0"}`}>{navigation.page}</p>
                     </Link>
                 ))}
             </div>

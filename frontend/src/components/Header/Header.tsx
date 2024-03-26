@@ -1,5 +1,5 @@
 import Image from "next/image";
-import HeaderButton from "@/components/HeaderButton";
+import Button from "@/components/Header/Button";
 import SnsLink from "@/components/SnsLink";
 
 const Header = () => {
@@ -14,10 +14,10 @@ const Header = () => {
                 </a>
             </h1>
             <div className={"flex items-center gap-2 ml-auto"}>
-                <HeaderButton text={"ログイン"}
-                              className={"text-black bg-white border border-gray-400  hover:bg-gray-200"}/>
-                <HeaderButton text={"新規登録"}
-                              className={"text-white bg-black border-none border-black  hover:opacity-70"}/>
+                <Button text={"ログイン"}
+                        className={"text-black bg-white border border-gray-400  hover:bg-gray-200"}/>
+                <Button text={"新規登録"}
+                        className={"text-white bg-black border-none border-black  hover:opacity-70"}/>
             </div>
         </header>
     )

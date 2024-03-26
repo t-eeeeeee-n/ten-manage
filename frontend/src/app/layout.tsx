@@ -16,13 +16,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="ja">
-      <body className={inter.className}>
-        <Header/>
-        <SideBar />
-        {children}
-      </body>
-    </html>
-  );
+    return (
+        <html lang="ja">
+            <body className={inter.className}>
+                <Header/>
+                <main className={"flex"}>
+                    <SideBar/>
+                    <div className={"flex flex-1 flex-col items-center justify-between p-14"}>
+                        {children}
+                    </div>
+                </main>
+            </body>
+        </html>
+    );
 }
