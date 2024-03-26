@@ -22,7 +22,7 @@ export default function RootLayout({
                 <Header/>
                 <main className={"flex"}>
                     <SideBar/>
-                    <div className={"flex flex-1 flex-col items-center justify-between p-14"}>
+                    <div className={"flex flex-1 flex-col p-14 bg-white"}>
                         {children}
                     </div>
                 </main>
