@@ -1,5 +1,10 @@
 "use client"
-import Error from "@/components/Error";
+import Error from "@/components/error";
+import type { Metadata } from 'next'
+
+export const metadata:Metadata = {
+    title: '500'
+}
 
 const ErrorPage = () => {
     return (

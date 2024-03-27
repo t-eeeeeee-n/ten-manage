@@ -1,9 +1,9 @@
 import Image from "next/image";
 
-export type ErrorProps = {
-    errorCode: number,
-    title: string,
-    message: string
+interface ErrorProps {
+    errorCode: number;
+    title: string;
+    message: string;
 }
 const Error = ({errorCode, title, message}: ErrorProps) => {
     return (
