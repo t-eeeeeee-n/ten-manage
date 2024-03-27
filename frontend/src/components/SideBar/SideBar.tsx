@@ -75,7 +75,7 @@ const SideBar = () => {
     }
 
     return(
-        <aside className={`duration-300 bg-slate-950 overflow-y-auto h-full min-h-screen min-w-[60px] ${menuOpen ? "w-[250px]" : "w-[60px]"}`}>
+        <aside className={`duration-300 bg-slate-950 overflow-y-auto overflow-x-hidden min-h-screen min-w-[60px] ${menuOpen ? "w-[250px]" : "w-[60px]"}`}>
             <div className={"p-2"}>
                 <div className={`flex mb-6 ${menuOpen ? "justify-end" : "justify-center"}`}>
                     <button onClick={() => setMenuOpen(!menuOpen)}>
