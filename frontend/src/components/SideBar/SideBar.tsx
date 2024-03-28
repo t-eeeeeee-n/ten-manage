@@ -1,7 +1,7 @@
 "use client";
 
 import {FaBrain, FaHome, FaLaptopCode, FaPenNib} from "react-icons/fa";
-import {ReactElement, useState} from "react";
+import {ReactElement, useEffect, useState} from "react";
 import {IoMenu, IoSearchSharp} from "react-icons/io5";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -10,7 +10,7 @@ import {IoMdSettings} from "react-icons/io";
 import { MdFavorite } from "react-icons/md";
 import {TbUserQuestion} from "react-icons/tb";
 
-type Navigation = {
+interface Navigation {
     page: string;
     path: string;
     icon: ReactElement;
@@ -48,8 +48,8 @@ const Navigations: Navigation[] = [
         icon: <IoMdSettings className={"size-6"} />
     },
     {
-        page: "Test",
-        path: "/test",
+        page: "SSR-Test",
+        path: "/test/ssr",
         icon: <SiTestinglibrary className={"size-6"} />
     }
 ]
@@ -58,6 +58,16 @@ const SideBar = () => {
 
     const [ menuOpen, setMenuOpen ] = useState(true);
 
+    useEffect(() => {
+        // 初期値
+        setMenuOpen(window.innerWidth > 768);
+
+        const mediaQuery = window.matchMedia('(max-width: 768px)');
+        const listener = () => setMenuOpen(!mediaQuery.matches);
+        mediaQuery.addEventListener("change", listener)
+        return () => mediaQuery.removeEventListener("change", listener)
+    }, []);
+
     const pathname = usePathname();
 
     const isPageActive = (pagePath: string): boolean => {
@@ -65,7 +75,7 @@ const SideBar = () => {
     }
 
     return(
-        <aside className={`duration-300 bg-slate-950 overflow-y-auto h-full min-h-screen ${menuOpen ? "w-[250px]" : "w-[60px]"}`}>
+        <aside className={`duration-300 bg-slate-950 overflow-y-auto overflow-x-hidden min-h-screen min-w-[60px] ${menuOpen ? "w-[250px]" : "w-[60px]"}`}>
             <div className={"p-2"}>
                 <div className={`flex mb-6 ${menuOpen ? "justify-end" : "justify-center"}`}>
                     <button onClick={() => setMenuOpen(!menuOpen)}>
@@ -77,7 +87,8 @@ const SideBar = () => {
                         <span className={"flex justify-center"}>
                             <IoSearchSharp className={`${menuOpen ? "mr-4" : "m-0"}`}/>
                         </span>
-                        <input placeholder="Search..."
+                        <label htmlFor="header-search" />
+                        <input id="header-search" placeholder="Search..."
                                className={`bg-gray-200 border-none focus:outline-none ${menuOpen ? "visible w-full" : "invisible w-0"}`}/>
                     </div>
                 </div>
