@@ -13,7 +13,6 @@ type ClientProps = {
 }
 
 const Client = ({todos}: ClientProps) => {
-
     return (
         <div className={"flex flex-col"}>
             <div className={"m-8"}>
@@ -34,14 +33,14 @@ const Client = ({todos}: ClientProps) => {
                     {todos.map((todo) => (
                         <li
                             key={todo.id}
-                            className={`flex items-center space-x-2 ${
+                            className={`flex items-center space-x-2 mb-2 ${
                                 todo.isCompleted ? 'line-through' : ''
                             }`}
                         >
                             <DoneTodo id={todo.id} isCompleted={todo.isCompleted}/>
-                            <span>{todo.name}</span>
-                            <form>
-                                <input type="hidden" name="id" value={todo.id}/>
+                            <span className={"w-28"}>{todo.name}</span>
+                            <form className={"w-14"}>
+                                <input type="hidden" value={todo.id}/>
                                 <button
                                     className="bg-red-500 px-2 py-1 rounded-lg text-sm text-white"
                                     formAction={deleteTodo}
@@ -62,14 +61,14 @@ const Client = ({todos}: ClientProps) => {
                     {todos.map((todo) => (
                         <li
                             key={todo.id}
-                            className={`flex items-center space-x-2 ${
+                            className={`flex items-center space-x-2 mb-2 ${
                                 todo.isCompleted ? 'line-through' : ''
                             }`}
                         >
                             <DoneTodo02 id={todo.id} isCompleted={todo.isCompleted} doneTodo={doneTodo02}/>
-                            <span>{todo.name}</span>
-                            <form>
-                                <input type="hidden" name="id" value={todo.id}/>
+                            <span className={"w-28"}>{todo.name}</span>
+                            <form className={"w-14"}>
+                                <input type="hidden" value={todo.id}/>
                                 <button
                                     className="bg-red-500 px-2 py-1 rounded-lg text-sm text-white"
                                     formAction={deleteTodo}

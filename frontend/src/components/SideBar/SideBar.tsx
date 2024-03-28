@@ -56,7 +56,7 @@ const Navigations: Navigation[] = [
 
 const SideBar = () => {
 
-    const [ menuOpen, setMenuOpen ] = useState(false);
+    const [ menuOpen, setMenuOpen ] = useState(true);
 
     useEffect(() => {
         // 初期値
@@ -87,7 +87,8 @@ const SideBar = () => {
                         <span className={"flex justify-center"}>
                             <IoSearchSharp className={`${menuOpen ? "mr-4" : "m-0"}`}/>
                         </span>
-                        <input placeholder="Search..."
+                        <label htmlFor="header-search" />
+                        <input id="header-search" placeholder="Search..."
                                className={`bg-gray-200 border-none focus:outline-none ${menuOpen ? "visible w-full" : "invisible w-0"}`}/>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 "use server"
 
 import prisma from '@/lib/prisma';
-import Client from "@/app/test/ssr/Client";
+import Client from "@/app/test/ssr/client";
 
 export type Todos = {
     id: number;
