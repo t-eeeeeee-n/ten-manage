@@ -13,7 +13,7 @@ datasource db {
   shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-model Todo {
+model todo {
   id  Int @id @default(autoincrement())
   name  String
   isCompleted Boolean @default(false)
