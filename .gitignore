@@ -79,5 +79,9 @@ fabric.properties
 .idea/
 .env
 
-frontend/prisma/dev.db
-frontend/public/ssrTest
+*.db-journal
+*.db-shm
+*.db-wal
+
+*/prisma/dev.db
+*/public/ssrTest
