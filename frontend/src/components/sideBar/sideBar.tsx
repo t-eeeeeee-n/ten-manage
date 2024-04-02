@@ -1,7 +1,7 @@
 "use client";
 
 import {FaBrain, FaHome, FaLaptopCode, FaPenNib} from "react-icons/fa";
-import {ReactElement, useEffect, useState} from "react";
+import React, {ReactElement, useEffect, useRef, useState} from "react";
 import {IoMenu, IoSearchSharp} from "react-icons/io5";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -54,18 +54,27 @@ const Navigations: Navigation[] = [
     }
 ]
 
-const SideBar = () => {
+const SideBar = ({children}: Readonly<{children: React.ReactNode;}>) => {
 
     const [ menuOpen, setMenuOpen ] = useState(true);
+    const [asideHeight, setAsideHeight] = useState('100vh');
+
+    // ヘッダー要素の参照を作成
 
     useEffect(() => {
-        // 初期値
-        setMenuOpen(window.innerWidth > 768);
+        const headerElement = document.querySelector('header');
+        if (headerElement) {
+            const headerHeight = headerElement.offsetHeight;
+            setAsideHeight(`calc(100vh - ${headerHeight}px)`);
+        }
 
         const mediaQuery = window.matchMedia('(max-width: 768px)');
         const listener = () => setMenuOpen(!mediaQuery.matches);
-        mediaQuery.addEventListener("change", listener)
-        return () => mediaQuery.removeEventListener("change", listener)
+        mediaQuery.addEventListener("change", listener);
+
+        return () => {
+            mediaQuery.removeEventListener("change", listener);
+        };
     }, []);
 
     const pathname = usePathname();
@@ -75,36 +84,43 @@ const SideBar = () => {
     }
 
     return(
-        <aside className={`duration-300 bg-slate-950 overflow-y-auto overflow-x-hidden min-h-screen min-w-[60px] ${menuOpen ? "w-[250px]" : "w-[60px]"}`}>
-            <div className={"p-2"}>
-                <div className={`flex mb-6 ${menuOpen ? "justify-end" : "justify-center"}`}>
-                    <button onClick={() => setMenuOpen(!menuOpen)}>
-                        <IoMenu className={"size-5 text-white"}/>
-                    </button>
-                </div>
-                <div className={"mb-6 bg-gray-200 rounded"}>
-                    <div className={`flex items-center p-2 ${menuOpen ? "" : "justify-center"}`}>
+        <>
+            <aside
+                className={`fixed duration-300 bg-slate-950 overflow-y-auto overflow-x-hidden min-w-[60px] ${menuOpen ? "w-[250px]" : "w-[60px]"}`}
+                style={{ height: asideHeight }}>
+                <div className={"p-2"}>
+                    <div className={`flex mb-6 ${menuOpen ? "justify-end" : "justify-center"}`}>
+                        <button onClick={() => setMenuOpen(!menuOpen)}>
+                            <IoMenu className={"size-5 text-white"}/>
+                        </button>
+                    </div>
+                    <div className={"mb-6 bg-gray-200 rounded"}>
+                        <div className={`flex items-center p-2 ${menuOpen ? "" : "justify-center"}`}>
                         <span className={"flex justify-center"}>
                             <IoSearchSharp className={`${menuOpen ? "mr-4" : "m-0"}`}/>
                         </span>
-                        <label htmlFor="header-search" />
-                        <input id="header-search" placeholder="Search..."
-                               className={`bg-gray-200 border-none focus:outline-none ${menuOpen ? "visible w-full" : "invisible w-0"}`}/>
+                            <label htmlFor="header-search"/>
+                            <input id="header-search" placeholder="Search..."
+                                   className={`bg-gray-200 border-none focus:outline-none ${menuOpen ? "visible w-full" : "invisible w-0"}`}/>
+                        </div>
                     </div>
-                </div>
-                <span className={"block h-1 mb-6 bg-gray-200 w-full"}></span>
-                {Navigations.map((navigation) => (
-                    <Link href={navigation.path} key={navigation.page}
-                          className={`flex items-center h-10 ${isPageActive(navigation.path) ? "bg-blue-700" : "hover:bg-blue-900"}`}>
+                    <span className={"block h-1 mb-6 bg-gray-200 w-full"}></span>
+                    {Navigations.map((navigation) => (
+                        <Link href={navigation.path} key={navigation.page}
+                              className={`flex items-center h-10 ${isPageActive(navigation.path) ? "bg-blue-700" : "hover:bg-blue-900"}`}>
                         <span className={`text-white ml-3 mr-2`}>
                             {navigation.icon}
                         </span>
-                        <p className={`leading-3 text-xs text-white duration-100 ${menuOpen ? "visible w-auto" : "invisible w-0"}`}>{navigation.page}</p>
-                    </Link>
-                ))}
+                            <p className={`leading-3 text-xs text-white duration-100 ${menuOpen ? "visible w-auto" : "invisible w-0"}`}>{navigation.page}</p>
+                        </Link>
+                    ))}
+                </div>
+            </aside>
+            <div className={`flex duration-300 flex-1 flex-col p-14 bg-white ${menuOpen ? "ml-[250px]" : "ml-[60px]"}`}>
+                {children}
             </div>
+        </>
 
-        </aside>
     )
 }
 

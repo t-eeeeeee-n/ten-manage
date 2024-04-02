@@ -10,7 +10,7 @@ services:
     volumes:
         - ./docker/db/init:/docker-entrypoint-initdb.d
     ports:
-      - "5432:5432"
+      - ${DB_PORT}
     command: ${DB_CMD}
 #  db:
 #    container_name: "ten-manage-db-container"

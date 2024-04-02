@@ -84,5 +84,6 @@ fabric.properties
 *.db-wal
 
 */prisma/dev.db
+f/prisma/schema.prisma
 */public/ssrTest/*
 !*/public/ssrTest/.gitkeep
