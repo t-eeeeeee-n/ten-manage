@@ -16,7 +16,8 @@ const getData = async (): Promise<Todos[]> => {
 const Page = async () => {
 
     const todos: Todos[] = await getData();
+    const sortedTodos: Todos[] = todos.sort((a, b) => a.id - b.id);
 
-    return <Client todos={todos}/>
+    return <Client todos={sortedTodos}/>
 }
 export default Page;
