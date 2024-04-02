@@ -30,7 +30,7 @@ const Client = ({todos}: ClientProps) => {
                 <h2 className="text-xl font-bold">use strartTransition</h2>
                 <h3 className="text-lg font-bold">Todo一覧</h3>
                 <ul className="mt-8">
-                    {todos.map((todo) => (
+                    {todos.map((todo: Todos) => (
                         <li
                             key={todo.id}
                             className={`flex items-center space-x-2 mb-2 ${
@@ -40,7 +40,7 @@ const Client = ({todos}: ClientProps) => {
                             <DoneTodo id={todo.id} isCompleted={todo.isCompleted}/>
                             <span className={"w-28"}>{todo.name}</span>
                             <form className={"w-14"}>
-                                <input type="hidden" value={todo.id}/>
+                                <input type="hidden" name="id" value={todo.id} />
                                 <button
                                     className="bg-red-500 px-2 py-1 rounded-lg text-sm text-white"
                                     formAction={deleteTodo}
