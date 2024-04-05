@@ -1,10 +1,10 @@
 "use client";
 
-import {FaBrain, FaHome, FaLaptopCode, FaPenNib} from "react-icons/fa";
-import React, {ReactElement, useEffect, useRef, useState} from "react";
+import {FaHome, FaLaptopCode, FaPenNib} from "react-icons/fa";
+import React, {ReactElement, useEffect, useState} from "react";
 import {IoMenu, IoSearchSharp} from "react-icons/io5";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {SiTestinglibrary} from "react-icons/si";
 import {IoMdSettings} from "react-icons/io";
 import { MdFavorite } from "react-icons/md";
@@ -43,6 +43,11 @@ const Navigations: Navigation[] = [
         icon: <FaLaptopCode className={"size-6"} />
     },
     {
+        page: "Shadcn",
+        path: "/shadcn",
+        icon: <FaLaptopCode className={"size-6"} />
+    },
+    {
         page: "Setting",
         path: "/setting",
         icon: <IoMdSettings className={"size-6"} />
@@ -62,13 +67,13 @@ const SideBar = ({children}: Readonly<{children: React.ReactNode;}>) => {
     // ヘッダー要素の参照を作成
 
     useEffect(() => {
-        const headerElement = document.querySelector('header');
+        const headerElement: null | HTMLElement = document.querySelector('header');
         if (headerElement) {
-            const headerHeight = headerElement.offsetHeight;
+            const headerHeight: number = headerElement.offsetHeight;
             setAsideHeight(`calc(100vh - ${headerHeight}px)`);
         }
 
-        const mediaQuery = window.matchMedia('(max-width: 768px)');
+        const mediaQuery: MediaQueryList = window.matchMedia('(max-width: 768px)');
         const listener = () => setMenuOpen(!mediaQuery.matches);
         mediaQuery.addEventListener("change", listener);
 
@@ -77,7 +82,7 @@ const SideBar = ({children}: Readonly<{children: React.ReactNode;}>) => {
         };
     }, []);
 
-    const pathname = usePathname();
+    const pathname: string = usePathname();
 
     const isPageActive = (pagePath: string): boolean => {
         return pagePath === pathname
@@ -86,7 +91,7 @@ const SideBar = ({children}: Readonly<{children: React.ReactNode;}>) => {
     return(
         <>
             <aside
-                className={`fixed duration-300 bg-slate-950 overflow-y-auto overflow-x-hidden min-w-[60px] ${menuOpen ? "w-[250px]" : "w-[60px]"}`}
+                className={`fixed duration-300 bg-black overflow-y-auto overflow-x-hidden min-w-[60px] ${menuOpen ? "w-[250px]" : "w-[60px]"}`}
                 style={{ height: asideHeight }}>
                 <div className={"p-2"}>
                     <div className={`flex mb-6 ${menuOpen ? "justify-end" : "justify-center"}`}>
@@ -97,7 +102,7 @@ const SideBar = ({children}: Readonly<{children: React.ReactNode;}>) => {
                     <div className={"mb-6 bg-gray-200 rounded"}>
                         <div className={`flex items-center p-2 ${menuOpen ? "" : "justify-center"}`}>
                         <span className={"flex justify-center"}>
-                            <IoSearchSharp className={`${menuOpen ? "mr-4" : "m-0"}`}/>
+                            <IoSearchSharp className={`text-black ${menuOpen ? "mr-4" : "m-0"}`}/>
                         </span>
                             <label htmlFor="header-search"/>
                             <input id="header-search" placeholder="Search..."
@@ -116,7 +121,7 @@ const SideBar = ({children}: Readonly<{children: React.ReactNode;}>) => {
                     ))}
                 </div>
             </aside>
-            <div className={`flex duration-300 flex-1 flex-col p-14 bg-white ${menuOpen ? "ml-[250px]" : "ml-[60px]"}`}>
+            <div className={`flex duration-300 flex-1 flex-col p-14 ${menuOpen ? "ml-[250px]" : "ml-[60px]"}`}>
                 {children}
             </div>
         </>
