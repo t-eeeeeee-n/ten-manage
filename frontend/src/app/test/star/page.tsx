@@ -1,9 +1,5 @@
 import Client from "@/app/test/star/client";
-
-export type Repo = {
-    name: string;
-    stargazers_count: number;
-}
+import {Repo} from "@/app/types";
 
 const getStaticProps = async (): Promise<Repo> => {
     // SSR

@@ -1,6 +1,6 @@
 "use client"
 
-import {Repo} from "@/app/test/star/page";
+import {Repo} from "@/app/types";
 
 type ClientProps = {
     repo: Repo;

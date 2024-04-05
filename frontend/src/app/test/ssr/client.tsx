@@ -6,7 +6,7 @@ import {deleteTodo, doneTodo02} from "@/app/test/ssr/actions";
 import AddTodo from "@/app/test/ssr/addTodo";
 import AddFile from "@/app/test/ssr/addFile";
 import Link from "next/link";
-import {Todos} from "@/app/test/ssr/page";
+import {Todos} from "@/app/types";
 
 type ClientProps = {
     todos: Todos[]

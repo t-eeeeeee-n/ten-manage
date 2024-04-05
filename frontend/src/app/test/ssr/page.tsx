@@ -2,12 +2,7 @@
 
 import prisma from '@/lib/prisma';
 import Client from "@/app/test/ssr/client";
-
-export type Todos = {
-    id: number;
-    name: string;
-    isCompleted: boolean;
-}
+import {Todos} from "@/app/types";
 
 const getData = async (): Promise<Todos[]> => {
     return await prisma.todo.findMany()
