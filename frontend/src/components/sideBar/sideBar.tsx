@@ -20,42 +20,42 @@ const Navigations: Navigation[] = [
     {
         page: "Home",
         path: "/",
-        icon: <FaHome className={"size-7"} />
+        icon: <FaHome className={"size-6"} />
     },
     {
         page: "Liked",
         path: "/liked",
-        icon: <MdFavorite className={"size-7"} />
+        icon: <MdFavorite className={"size-6"} />
     },
     {
         page: "Diary",
         path: "/diary",
-        icon: <FaPenNib className={"size-7"} />
+        icon: <FaPenNib className={"size-6"} />
     },
     {
         page: "Idea",
         path: "/idea",
-        icon: <TbUserQuestion className={"size-7"} />
+        icon: <TbUserQuestion className={"size-6"} />
     },
     {
         page: "Code",
         path: "/code",
-        icon: <FaLaptopCode className={"size-7"} />
+        icon: <FaLaptopCode className={"size-6"} />
     },
     {
         page: "Shadcn",
         path: "/shadcn",
-        icon: <FaLaptopCode className={"size-7"} />
+        icon: <FaLaptopCode className={"size-6"} />
     },
     {
         page: "Setting",
         path: "/setting",
-        icon: <IoMdSettings className={"size-7"} />
+        icon: <IoMdSettings className={"size-6"} />
     },
     {
         page: "SSR-Test",
         path: "/test/ssr",
-        icon: <SiTestinglibrary className={"size-7"} />
+        icon: <SiTestinglibrary className={"size-6"} />
     }
 ]
 
@@ -91,7 +91,7 @@ const SideBar = ({children}: Readonly<{children: React.ReactNode;}>) => {
     return(
         <>
             <aside
-                className={`fixed duration-300 ease-in-out overflow-y-auto overflow-x-hidden min-w-[52px] ${menuOpen ? "w-[250px]" : "w-[52px]"}`}
+                className={`fixed duration-300 ease-in-out overflow-y-auto overflow-x-hidden min-w-[60px] ${menuOpen ? "w-[250px]" : "w-[60px]"}`}
                 style={{ height: asideHeight }}>
                 <div className={"p-2"}>
                     <div className={`flex mb-6 ${menuOpen ? "justify-end" : "justify-center"}`}>
@@ -112,11 +112,11 @@ const SideBar = ({children}: Readonly<{children: React.ReactNode;}>) => {
                     <span className={"block h-1 mb-6 bg-gray-200 w-full"}></span>
                     {Navigations.map((navigation) => (
                         <Link href={navigation.path} key={navigation.page}
-                              className={`flex items-center h-12 ${isPageActive(navigation.path) ? "bg-blue-500" : "hover:bg-blue-400"}`}>
+                              className={`flex items-center h-10 ${isPageActive(navigation.path) ? "bg-blue-700" : "hover:bg-blue-900"}`}>
                         <span className={`ml-3 mr-2`}>
                             {navigation.icon}
                         </span>
-                            <p className={`leading-3 text-md duration-100 ${menuOpen ? "visible w-auto" : "invisible w-0"}`}>{navigation.page}</p>
+                            <p className={`leading-3 text-xs duration-100 ${menuOpen ? "visible w-auto" : "invisible w-0"}`}>{navigation.page}</p>
                         </Link>
                     ))}
                 </div>
