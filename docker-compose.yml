@@ -1,17 +1,17 @@
 version: '3.9'
 
 services:
-  db:
-    image: postgres:16
-    container_name: "ten-manage-db-container"
-    environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    volumes:
-        - ./docker/db/init:/docker-entrypoint-initdb.d
-    ports:
-      - ${DB_PORT}
-    command: ${DB_CMD}
+#  db:
+#    image: postgres:16
+#    container_name: "ten-manage-db-container"
+#    environment:
+#      POSTGRES_USER: ${DB_USER}
+#      POSTGRES_PASSWORD: ${DB_PASSWORD}
+#    volumes:
+#        - ./docker/db/init:/docker-entrypoint-initdb.d
+#    ports:
+#      - ${DB_PORT}
+#    command: ${DB_CMD}
 #  db:
 #    container_name: "ten-manage-db-container"
 #    build:
@@ -62,5 +62,5 @@ services:
     environment:
       - WATCHPACK_POLLING=true
     command: ${NEXT_CMD}
-    depends_on:
-      - "db"
+#    depends_on:
+#      - "db"
