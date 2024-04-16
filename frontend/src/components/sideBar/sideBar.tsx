@@ -112,7 +112,7 @@ const SideBar = ({children}: Readonly<{children: React.ReactNode;}>) => {
                     <span className={"block h-1 mb-6 bg-gray-200 w-full"}></span>
                     {Navigations.map((navigation) => (
                         <Link href={navigation.path} key={navigation.page}
-                              className={`flex items-center h-10 ${isPageActive(navigation.path) ? "text-white bg-blue-700 duration-200" : "hover:text-white hover:bg-blue-500 duration-200"}`}>
+                              className={`flex items-center h-10 ${isPageActive(navigation.path) ? "text-white bg-blue-700 duration-200" : "hover:text-white hover:bg-blue-500 duration-200 "}`}>
                             <span className={`ml-3 mr-2`}>{navigation.icon}</span>
                             <p className={`leading-3 text-xs duration-100 ${menuOpen ? "visible w-auto" : "invisible w-0"}`}>{navigation.page}</p>
                         </Link>
