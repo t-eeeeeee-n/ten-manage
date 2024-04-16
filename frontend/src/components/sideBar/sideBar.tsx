@@ -91,7 +91,7 @@ const SideBar = ({children}: Readonly<{children: React.ReactNode;}>) => {
     return(
         <>
             <aside
-                className={`fixed duration-300 ease-in-out overflow-y-auto overflow-x-hidden min-w-[60px] ${menuOpen ? "w-[250px]" : "w-[60px]"}`}
+                className={`fixed duration-300 ease-in-out overflow-y-auto overflow-x-hidden min-w-[65px] shadow-md dark:shadow-zinc-500 ${menuOpen ? "w-[250px]" : "w-[60px]"}`}
                 style={{ height: asideHeight }}>
                 <div className={"p-2"}>
                     <div className={`flex mb-6 ${menuOpen ? "justify-end" : "justify-center"}`}>
@@ -112,10 +112,8 @@ const SideBar = ({children}: Readonly<{children: React.ReactNode;}>) => {
                     <span className={"block h-1 mb-6 bg-gray-200 w-full"}></span>
                     {Navigations.map((navigation) => (
                         <Link href={navigation.path} key={navigation.page}
-                              className={`flex items-center h-10 ${isPageActive(navigation.path) ? "bg-blue-700" : "hover:bg-blue-900"}`}>
-                        <span className={`ml-3 mr-2`}>
-                            {navigation.icon}
-                        </span>
+                              className={`flex items-center h-10 ${isPageActive(navigation.path) ? "text-white bg-blue-700 duration-200" : "hover:text-white hover:bg-blue-500 duration-200"}`}>
+                            <span className={`ml-3 mr-2`}>{navigation.icon}</span>
                             <p className={`leading-3 text-xs duration-100 ${menuOpen ? "visible w-auto" : "invisible w-0"}`}>{navigation.page}</p>
                         </Link>
                     ))}
