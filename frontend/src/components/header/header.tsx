@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Button from "@/components/header/button";
-import SnsLink from "@/components/snsLink";
-import {ModeToggle} from "@/components/modalToggle";
+import SnsLink from "@/components/header/snsLink";
+import ModeToggle from "@/components/header/modalToggle";
 
 const Header = () => {
     return(

@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-interface ErrorProps {
+type ErrorProps = {
     errorCode: number;
     title: string;
     message: string;

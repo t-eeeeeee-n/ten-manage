@@ -1,65 +1,22 @@
 "use client";
 
-import {FaHome, FaLaptopCode, FaPenNib} from "react-icons/fa";
 import React, {ReactElement, useEffect, useState} from "react";
 import {IoMenu, IoSearchSharp} from "react-icons/io5";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {SiTestinglibrary} from "react-icons/si";
-import {IoMdSettings} from "react-icons/io";
-import { MdFavorite } from "react-icons/md";
-import {TbUserQuestion} from "react-icons/tb";
 
-interface Navigation {
+export type Navigation = {
     page: string;
     path: string;
     icon: ReactElement;
 }
 
-const Navigations: Navigation[] = [
-    {
-        page: "Home",
-        path: "/",
-        icon: <FaHome className={"size-6"} />
-    },
-    {
-        page: "Liked",
-        path: "/liked",
-        icon: <MdFavorite className={"size-6"} />
-    },
-    {
-        page: "Diary",
-        path: "/diary",
-        icon: <FaPenNib className={"size-6"} />
-    },
-    {
-        page: "Idea",
-        path: "/idea",
-        icon: <TbUserQuestion className={"size-6"} />
-    },
-    {
-        page: "Code",
-        path: "/code",
-        icon: <FaLaptopCode className={"size-6"} />
-    },
-    {
-        page: "Shadcn",
-        path: "/shadcn",
-        icon: <FaLaptopCode className={"size-6"} />
-    },
-    {
-        page: "Setting",
-        path: "/setting",
-        icon: <IoMdSettings className={"size-6"} />
-    },
-    {
-        page: "SSR-Test",
-        path: "/test/ssr",
-        icon: <SiTestinglibrary className={"size-6"} />
-    }
-]
+type SideBarProps = {
+    children: React.ReactNode;
+    navigations: Navigation[]; // Navigation 型の配列を受け取る
+};
 
-const SideBar = ({children}: Readonly<{children: React.ReactNode;}>) => {
+const SideBar: React.FC<SideBarProps> = ({ children, navigations }) => {
 
     const [ menuOpen, setMenuOpen ] = useState(true);
     const [asideHeight, setAsideHeight] = useState('100vh');
@@ -110,7 +67,7 @@ const SideBar = ({children}: Readonly<{children: React.ReactNode;}>) => {
                         </div>
                     </div>
                     <span className={"block h-1 mb-6 bg-gray-200 w-full"}></span>
-                    {Navigations.map((navigation) => (
+                    {navigations.map((navigation) => (
                         <Link href={navigation.path} key={navigation.page}
                               className={`flex items-center h-10 ${isPageActive(navigation.path) ? "text-white bg-blue-700 duration-200" : "hover:text-white hover:bg-blue-500 duration-200 "}`}>
                             <span className={`ml-3 mr-2`}>{navigation.icon}</span>

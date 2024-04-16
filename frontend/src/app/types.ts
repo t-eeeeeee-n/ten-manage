@@ -1,10 +1,10 @@
-export interface Todos {
+export type Todos = {
     id: number;
     name: string;
     isCompleted: boolean;
 }
 
-export interface Repo {
+export type Repo = {
     name: string;
     stargazers_count: number;
 }
