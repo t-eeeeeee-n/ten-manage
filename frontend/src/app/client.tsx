@@ -2,7 +2,6 @@
 
 import Logout from "@/components/auth/logout";
 import {Session} from "next-auth";
-import Image from "next/image";
 
 const Client = ({session}: {session: Session | null}) => {
     return(
@@ -12,7 +11,7 @@ const Client = ({session}: {session: Session | null}) => {
             <div>{session?.user?.role}</div>
             <div>{session?.user?.backendToken}</div>
             <div>{session?.expires}</div>
-            <Image
+            <img
                 src={session?.user?.image ?? ``}
                 alt=""
                 style={{borderRadius: '50px'}}

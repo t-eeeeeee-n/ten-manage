@@ -4,7 +4,6 @@ import {ReadonlyURLSearchParams, useSearchParams} from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import React from "react";
 
-
 export type SignInProps = {
     csrfToken?: string;
 };
