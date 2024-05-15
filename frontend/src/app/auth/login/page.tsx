@@ -2,7 +2,7 @@ import Client from "./client_bak";
 import SignIn from "./client";
 import {apiAuthPrefix} from "@/route";
 
-async function getCsrfToken() {
+const getCsrfToken= async () => {
     const apiUrl: string = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
     try {
         const response = await fetch(`${apiUrl}${apiAuthPrefix}/csrf`, {
