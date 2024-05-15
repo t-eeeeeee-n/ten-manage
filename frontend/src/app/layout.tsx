@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type {GetServerSideProps, Metadata} from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
@@ -10,8 +10,12 @@ import {MdFavorite} from "react-icons/md";
 import {TbUserQuestion} from "react-icons/tb";
 import {IoMdSettings} from "react-icons/io";
 import {SiTestinglibrary} from "react-icons/si";
-import React from "react";
+import React, {PropsWithChildren} from "react";
 import {Navigation} from "@/components/sideBar/sideBar";
+import NextAuthProvider from "@/providers/NextAuth";
+import { SessionProvider } from 'next-auth/react';
+import {auth} from "@/auth";
+import {Session} from "next-auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -63,28 +67,27 @@ const Navigations: Navigation[] = [
     }
 ]
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function RootLayout({ children }: PropsWithChildren) {
+    const session: Session | null = await auth();
     return (
         <html lang="ja">
             <body className={cn(inter.className, "min-h-dvh")}>
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="light"
-                    enableSystem
-                    disableTransitionOnChange
-                >
-                    <Header/>
-                    <main className={"flex"}>
-                        <SideBar navigations={Navigations}>
-                            {children}
-                        </SideBar>
-                    </main>
-                    <footer className={"sticky top-full h-16 flex justify-end items-end px-4"}>&copy;ten</footer>
-                </ThemeProvider>
+                <SessionProvider session={session}>
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="light"
+                        enableSystem
+                        disableTransitionOnChange
+                    >
+                        <Header/>
+                        <main className={"flex"}>
+                            <SideBar navigations={Navigations} session={session}>
+                                {children}
+                            </SideBar>
+                        </main>
+                        <footer className={"sticky top-full h-16 flex justify-end items-end px-4"}>&copy;ten</footer>
+                    </ThemeProvider>
+                </SessionProvider>
             </body>
         </html>
     );
