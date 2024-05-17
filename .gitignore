@@ -87,3 +87,4 @@ fabric.properties
 */prisma/schema.prisma
 */public/ssrTest/*
 !*/public/ssrTest/.gitkeep
+google_auth.txt
