@@ -16,6 +16,7 @@ import NextAuthProvider from "@/providers/NextAuth";
 import { SessionProvider } from 'next-auth/react';
 import {auth} from "@/auth";
 import {Session} from "next-auth";
+import {Navigations} from "@/constants/navigations";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,53 +25,10 @@ export const metadata: Metadata = {
     description: "ten manage site"
 };
 
-const Navigations: Navigation[] = [
-    {
-        page: "Home",
-        path: "/",
-        icon: <FaHome className={"size-6"} />
-    },
-    {
-        page: "Liked",
-        path: "/liked",
-        icon: <MdFavorite className={"size-6"} />
-    },
-    {
-        page: "Diary",
-        path: "/diary",
-        icon: <FaPenNib className={"size-6"} />
-    },
-    {
-        page: "Idea",
-        path: "/idea",
-        icon: <TbUserQuestion className={"size-6"} />
-    },
-    {
-        page: "Code",
-        path: "/code",
-        icon: <FaLaptopCode className={"size-6"} />
-    },
-    {
-        page: "Shadcn",
-        path: "/shadcn",
-        icon: <FaLaptopCode className={"size-6"} />
-    },
-    {
-        page: "Setting",
-        path: "/setting",
-        icon: <IoMdSettings className={"size-6"} />
-    },
-    {
-        page: "SSR-Test",
-        path: "/test/ssr",
-        icon: <SiTestinglibrary className={"size-6"} />
-    }
-]
-
 export default async function RootLayout({ children }: PropsWithChildren) {
     const session: Session | null = await auth();
     return (
-        <html lang="ja">
+        <html lang="ja" suppressHydrationWarning>
             <body className={cn(inter.className, "min-h-dvh")}>
                 <SessionProvider session={session}>
                     <ThemeProvider
