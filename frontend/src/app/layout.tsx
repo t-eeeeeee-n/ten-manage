@@ -5,14 +5,7 @@ import Header from "@/components/header";
 import SideBar from "@/components/sideBar";
 import {cn} from "@/lib/utils";
 import ThemeProvider from "@/components/header/themeProvider";
-import {FaHome, FaLaptopCode, FaPenNib} from "react-icons/fa";
-import {MdFavorite} from "react-icons/md";
-import {TbUserQuestion} from "react-icons/tb";
-import {IoMdSettings} from "react-icons/io";
-import {SiTestinglibrary} from "react-icons/si";
 import React, {PropsWithChildren} from "react";
-import {Navigation} from "@/components/sideBar/sideBar";
-import NextAuthProvider from "@/providers/NextAuth";
 import { SessionProvider } from 'next-auth/react';
 import {auth} from "@/auth";
 import {Session} from "next-auth";
@@ -29,7 +22,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
     const session: Session | null = await auth();
     return (
         <html lang="ja" suppressHydrationWarning>
-            <body className={cn(inter.className, "min-h-dvh")}>
+                <body className={cn(inter.className, "min-h-dvh")}>
                 <SessionProvider session={session}>
                     <ThemeProvider
                         attribute="class"
