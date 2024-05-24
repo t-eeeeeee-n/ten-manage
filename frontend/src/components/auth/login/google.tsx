@@ -1,13 +1,14 @@
-"use client"
-
-import {useSession} from "next-auth/react";
+import React from 'react';
+import { useSession, signIn } from 'next-auth/react';
 import Logout from "@/components/auth/logout";
-import Login from "@/components/auth/login";
-import Image from 'next/image';
 
-const Client = () => {
-
+const Google = () => {
     const { data: session, status } = useSession();
+
+    if (status === 'loading') {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div>
             {status === 'authenticated' ? (
@@ -24,10 +25,15 @@ const Client = () => {
                     </div>
                 </div>
             ) : (
-                <Login />
+                <div>
+                    <p>あなたはログインしていません</p>
+                    <button onClick={() => signIn('google', { redirect: true, callbackUrl: '/' }, { prompt: 'login' })}>
+                        Googleでログイン
+                    </button>
+                </div>
             )}
         </div>
     );
 }
 
-export default Client;
+export default Google;
