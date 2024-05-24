@@ -1,6 +1,7 @@
-import Client from "./client_bak";
-import SignIn from "./client";
+import Client from "./client";
 import {apiAuthPrefix} from "@/route";
+import {Session} from "next-auth";
+import {auth} from "@/auth";
 
 const getCsrfToken= async () => {
     const apiUrl: string = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
@@ -26,12 +27,12 @@ const getCsrfToken= async () => {
 }
 
 const Page = async () => {
+    const session: Session | null = await auth();
     const csrfToken = await getCsrfToken();
 
     return (
-        <div>
-            <Client />
-            <SignIn csrfToken={csrfToken} />
+        <div className={"w-full min-h-dvh bg-black"}>
+            <Client csrfToken={csrfToken} />
         </div>
     )
 }

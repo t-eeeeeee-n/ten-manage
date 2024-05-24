@@ -1,44 +1,21 @@
 "use client";
 
-import {ReadonlyURLSearchParams, useSearchParams} from 'next/navigation';
-import { signIn } from 'next-auth/react';
 import React from "react";
+import Google from "@/components/auth/login/google";
+import Credentials, {SignInProps} from "@/components/auth/login/credentials.";
+import Image from "next/image";
 
-export type SignInProps = {
-    csrfToken?: string;
-};
-
-export default function SignIn({ csrfToken }: SignInProps) {
-    const searchParams: ReadonlyURLSearchParams = useSearchParams();
-    const error: string = searchParams.get('error') ?? '';
-
-    const handleSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void> = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const formData: FormData = new FormData(event.currentTarget);
-        const username: string = formData.get('username') as string;
-        const password: string = formData.get('password') as string;
-
-        await signIn('credentials', {
-            redirect: true,
-            email: username,
-            password,
-            callbackUrl: '/',
-        });
-    };
+const Client = ({ csrfToken }: SignInProps) => {
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-            <label>
-                ユーザ名
-                <input name="username" type="text" />
-            </label>
-            <label>
-                パスワード
-                <input name="password" type="password" />
-            </label>
-            <button type="submit">サインイン</button>
-            {error && <div>サインイン失敗</div>}
-        </form>
+        <div className={"w-1/4 mx-auto mt-16 bg-emerald-50 p-10"}>
+            <div className={"flex flex-col justify-center items-center"}>
+                <Image alt="logo" src="/common/ten-ten.svg" width={100} height={100} className={""}/>
+                <span>ten-dev</span>
+            </div>
+            <Credentials csrfToken={csrfToken} />
+            <Google />
+        </div>
     );
 }
+export default Client;

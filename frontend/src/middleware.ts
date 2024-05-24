@@ -32,7 +32,7 @@ export default auth((req: NextRequest): Response | void => {
 
 // Optionally, don't invoke Middleware on some paths
 export const config = {
-    matcher: ["/((?!api|auth|_next/static|_next/image|favicon.ico).*)"],
+    matcher: ["/((?!api|auth|_next/static|_next/image|favicon.ico|common).*)"],
     // matcher: ['/((?!api|auth|_next).*)'],
 }
 
