@@ -2,7 +2,7 @@
 
 import React from "react";
 import Google from "@/components/auth/login/google";
-import Credentials, {SignInProps} from "@/components/auth/login/credentials.";
+import Credentials, {SignInProps} from "@/components/auth/login/credentials";
 import Image from "next/image";
 
 const Client = ({ csrfToken }: SignInProps) => {
