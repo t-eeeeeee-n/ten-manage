@@ -29,11 +29,14 @@ const Credentials = ({ csrfToken }: SignInProps) => {
     return (
         <form onSubmit={handleSubmit} className={"block"}>
             <input name="csrfToken" type="hidden" defaultValue={csrfToken}/>
-            <label htmlFor={"user"} className={"block"}>ユーザ名</label>
-            <input id={"user"} name="username" type="text" className={"w-full border"}/>
+            <label htmlFor={"mail"} className={"block"}>メールアドレス</label>
+            <input id={"mail"} name="mail" type="text" className={"w-full py-1 border-2 rounded-xl placeholder:pl-4"} placeholder="メールアドレス"/>
             <label htmlFor={"password"} className={"block"}>パスワード</label>
-            <input id={"password"} name="password" type="password" className={"w-full border"}/>
-            <button type="submit" className={"block"}>サインイン</button>
+            <input id={"password"} name="password" type="password" className={"w-full py-1 border-2 rounded-xl mb-1 placeholder:pl-4"}　placeholder="パスワード"/>
+            <button className={"font-bold mb-3"}>パスワードを忘れた場合</button>
+            <button type="submit" className={"block w-full h-full py-1 mb-2 bg-red-600 text-white rounded-3xl border-2"}>
+                <span>ログイン</span>
+            </button>
             {error && <div>サインイン失敗</div>}
         </form>
     );
