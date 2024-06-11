@@ -36,10 +36,13 @@ export default async function RootLayout({ children }: PropsWithChildren) {
                                 {children}
                             </SideBar>
                         </main>
-                        <footer className={"sticky top-full h-16 flex justify-end items-end px-4"}>&copy;ten</footer>
+                        {session && (
+                            <footer
+                                className={"fixed bottom-0 left-0 w-full h-16 flex justify-end items-center px-4"}>&copy;ten</footer>
+                        )}
                     </ThemeProvider>
                 </SessionProvider>
-            </body>
+                </body>
         </html>
     );
 }
