@@ -6,7 +6,7 @@ type ModalProps = {
 }
 const Modal = ({children}: ModalProps) => {
     return(
-        <div className="w-96 mx-auto mt-32 bg-white p-10 rounded-lg shadow-md">
+        <div className="md:w-96 w-full mx-auto md:h-auto h-full md:mt-32 mt-0 bg-white p-10 rounded-lg shadow-md">
             <div className={"flex flex-col justify-center items-center"}>
                 <Image alt="logo" src="/common/ten-ten.svg" width={100} height={100} className={""}/>
                 <span>ten-dev</span>
