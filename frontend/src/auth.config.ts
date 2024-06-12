@@ -3,9 +3,13 @@ import type {NextAuthConfig, Session, User} from "next-auth"
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import {JWT} from "next-auth/jwt";
+import bcrypt from 'bcryptjs';
+import {PrismaClient} from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 // export default { providers: [GitHub, Google] } satisfies NextAuthConfig
-export default {
+const authOptions: NextAuthConfig = {
     secret: "aaaaa",
     providers: [
         Google(
@@ -16,21 +20,24 @@ export default {
         ),
         Credentials({
             credentials: {
-                email: { label: "メールアドレス", type: "email" },
+                mail: { label: "メールアドレス", type: "mail" },
                 password: { label: "パスワード", type: "password" },
             },
             async authorize(credentials) {
-                // credentials に入力が渡ってくる
-                const user = {
-                    id: "id",
-                    name: "ten",
-                    email: "ten@example.com",
-                    role: "admin",
-                    backendToken: "backEndAccessToken",
-                };
-                if(user){
-                    return user;
-                }else{
+                const mail = credentials?.mail as string;
+                const password = credentials?.password as string;
+
+                const user = await authenticateUser(mail, password);
+
+                if (user) {
+                    return {
+                        id: user.id,
+                        name: user.name,
+                        mail: user.mail,
+                        role: user.role,
+                        backendToken: user.backendToken,
+                    };
+                } else {
                     return null;
                 }
             },
@@ -55,4 +62,23 @@ export default {
             return session;
         },
     }
-} satisfies NextAuthConfig
+}
+
+async function authenticateUser(mail: string, password: string) {
+    const user = await prisma.user.findUnique({
+        where: { mail }
+    });
+
+    if (user && await bcrypt.compare(password, user.password)) {
+        return {
+            id: user.id.toString(),
+            name: user.name,
+            mail: user.mail,
+            role: user.role,
+            backendToken: user.backendToken,
+        };
+    }
+    return null;
+}
+
+export default authOptions satisfies NextAuthConfig;

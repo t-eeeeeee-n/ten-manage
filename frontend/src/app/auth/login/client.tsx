@@ -3,22 +3,24 @@
 import React from "react";
 import Google from "@/components/auth/login/google";
 import Credentials, {SignInProps} from "@/components/auth/login/credentials";
-import Image from "next/image";
+import Modal from "@/components/auth/modal";
 
 const Client = ({ csrfToken }: SignInProps) => {
 
     return (
-        <div className={"w-96 mx-auto mt-32 bg-neutral-50 p-10 "}>
-            <div className={"flex flex-col justify-center items-center"}>
-                <Image alt="logo" src="/common/ten-ten.svg" width={100} height={100} className={""}/>
-                <span>ten-dev</span>
-            </div>
-            <Credentials csrfToken={csrfToken} />
-            <div className={"flex justify-center mb-2"}>
+        <Modal>
+            <Credentials csrfToken={csrfToken}/>
+            <div className={"flex justify-center my-2"}>
                 <p>または</p>
             </div>
-            <Google />
-        </div>
+            <Google/>
+            <div>
+                <p className="text-center text-gray-500 mt-6">
+                    新規登録は
+                    <a href="/auth/register" className="text-blue-500 ml-1">こちら</a>
+                </p>
+            </div>
+        </Modal>
     );
 }
 export default Client;

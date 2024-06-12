@@ -7,7 +7,7 @@ const Client = ({session}: {session: Session | null}) => {
     return(
         <div>
             <div>{session?.user?.name}</div>
-            <div>{session?.user?.email}</div>
+            <div>{session?.user?.mail}</div>
             <div>{session?.user?.role}</div>
             <div>{session?.user?.backendToken}</div>
             <div>{session?.expires}</div>

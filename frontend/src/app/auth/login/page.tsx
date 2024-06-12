@@ -31,7 +31,7 @@ const Page = async () => {
     const csrfToken = await getCsrfToken();
 
     return (
-        <div className={"w-full min-h-dvh bg-black"}>
+        <div className={"w-full min-h-dvh bg-gray-100"}>
             <Client csrfToken={csrfToken} />
         </div>
     )
