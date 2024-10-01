@@ -12,7 +12,6 @@ export type SignInProps = {
 
 const Credentials = ({ csrfToken }: SignInProps) => {
     const searchParams: ReadonlyURLSearchParams = useSearchParams();
-    const error: string = searchParams.get('error') ?? '';
     const [signInError, setSignInError] = useState('');
     const [loading, setLoading] = useState(false);
     const [inputErrors, setInputErrors] = useState({ mail: '', password: '' });
@@ -110,7 +109,7 @@ const Credentials = ({ csrfToken }: SignInProps) => {
                         <FaExclamationCircle className="mr-2"/>
                         <div>
                             <strong>サインインに失敗しました。</strong><br/>
-                            詳細を確認して、もう一度お試しください。
+                            メールアドレスまたはパスワードが間違っています。
                         </div>
                     </div>
                 )}
