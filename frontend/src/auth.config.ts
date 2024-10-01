@@ -27,18 +27,18 @@ const authOptions: NextAuthConfig = {
                 const mail = credentials?.mail as string;
                 const password = credentials?.password as string;
 
-                const user = await authenticateUser(mail, password);
+                const result = await authenticateUser(mail, password);
 
-                if (user) {
+                if (result && !result.error) {
                     return {
-                        id: user.id,
-                        name: user.name,
-                        mail: user.mail,
-                        role: user.role,
-                        backendToken: user.backendToken,
+                        id: result.id,
+                        name: result.name,
+                        mail: result.mail,
+                        role: result.role,
+                        backendToken: result.backendToken,
                     };
                 } else {
-                    return null;
+                    throw new Error(result?.error || 'ログインに失敗しました。');
                 }
             },
         }),
@@ -69,7 +69,11 @@ async function authenticateUser(mail: string, password: string) {
         where: { mail }
     });
 
-    if (user && await bcrypt.compare(password, user.password)) {
+    if (!user) {
+        return { error: 'ユーザーが見つかりません。' };
+    }
+
+    if (await bcrypt.compare(password, user.password)) {
         return {
             id: user.id.toString(),
             name: user.name,
@@ -77,8 +81,9 @@ async function authenticateUser(mail: string, password: string) {
             role: user.role,
             backendToken: user.backendToken,
         };
+    } else {
+        return { error: 'パスワードが間違っています。' };
     }
-    return null;
 }
 
 export default authOptions satisfies NextAuthConfig;
