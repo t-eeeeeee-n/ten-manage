@@ -2,6 +2,9 @@
   "name": "ten-manage",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && npx prisma migrate deploy && next build",
